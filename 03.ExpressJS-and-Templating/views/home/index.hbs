@@ -1,0 +1,27 @@
+ <h1>Cat Shelter</h1>
+        <form action="/search">
+            <input type="text">
+            <button type="button">Search</button>
+        </form>
+	
+    <main>
+        <section class="cats">
+            <ul>
+                {{#each cats}}
+                    <li>
+					<img src="{{img}}" alt="Black Cat">
+					<h3>{{name}}</h3>
+					<p><span>Breed: </span>{{breed}}</p>
+					<p><span>Description: </span>{{description}}</p>
+					<ul class="buttons">
+						<li class="btn edit"><a href="/edit/{{id}}">Change Info</a></li>
+						<li class="btn delete"><a href="/shelter/{{id}}">New Home</a></li>
+					</ul>
+				</li>
+                {{/each}}
+            </ul>
+        </section>
+    </main>
+
+</body>
+</html>
