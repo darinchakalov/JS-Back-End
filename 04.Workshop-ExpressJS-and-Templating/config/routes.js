@@ -10,7 +10,7 @@ module.exports = (app) => {
 
 	app.use('/cube', cubeController);
 
-	app.use(detailsController)
+	// app.use(detailsController)
 
 	app.get("*", (req, res) => {
 		res.render("404");
