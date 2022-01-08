@@ -10,7 +10,7 @@ const renderCreateCube = (req, res) => {
 const createCube = (req, res) => {
 	let { name, description, imageUrl, difficulty } = req.body;
 	cubeService.create(name, description, imageUrl, difficulty);
-	res.redirect("/cube/create");
+	res.redirect("/");
 };
 
 const renderDetailsPage = (req, res) => {
@@ -22,6 +22,6 @@ const renderDetailsPage = (req, res) => {
 
 router.get("/create", renderCreateCube);
 router.post("/create", createCube);
-router.get('/:id', renderDetailsPage)
+router.get('/details/:id', renderDetailsPage)
 
 module.exports = router;

@@ -11,8 +11,32 @@ const create = (name, description, imageUrl, difficulty) => {
 	fs.writeFileSync("./config/database.json", result);
 };
 
+const getAll = () => {
+	return cubesDB;
+}
+
+const search = (text, from , to) => {
+	let result = cubesDB;
+	if (text) {
+		result = result.filter(c => c.name.toLowerCase().includes(text.toLowerCase()))
+	}
+
+	if (from) {
+		result = result.filter(c => c.difficulty >= from)
+	}
+
+	if (to) {
+		result = result.filter(c => c.difficulty <= to)
+	}
+	console.log(result);
+
+	return result;
+}
+
 let cubeService = {
-    create
+    create,
+	getAll,
+	search
 }
 
 module.exports = cubeService;

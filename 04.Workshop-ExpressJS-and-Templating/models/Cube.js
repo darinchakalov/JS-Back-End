@@ -5,7 +5,7 @@ class Cube {
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
-        this.difficulty = difficulty;
+        this.difficulty = Number(difficulty);
         this.id = uniqId()
     }
 }
