@@ -28,8 +28,6 @@ const search = (text, from , to) => {
 	if (to) {
 		result = result.filter(c => c.difficulty <= to)
 	}
-	console.log(result);
-
 	return result;
 }
 
