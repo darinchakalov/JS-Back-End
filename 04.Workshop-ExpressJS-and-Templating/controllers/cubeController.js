@@ -3,8 +3,8 @@ const router = express.Router();
 const cubeService = require("../services/cubeService.js");
 const cubes = require("../config/database.json");
 
-const renderCreateCube = (req, res) => {
-	res.render("create");
+const renderPage = (req, res) => {
+	res.render("cube/create");
 };
 
 const createCube = (req, res) => {
@@ -23,7 +23,7 @@ const renderDetailsPage = (req, res) => {
 	cubeService
 		.getSingle(id)
 		.then((cube) => {
-			res.render("details", cube);
+			res.render("cube/details", cube);
 		})
 		.catch((err) => {
 			res.status(400);
@@ -31,7 +31,7 @@ const renderDetailsPage = (req, res) => {
 		});
 };
 
-router.get("/create", renderCreateCube);
+router.get("/create", renderPage);
 router.post("/create", createCube);
 router.get("/details/:id", renderDetailsPage);
 
