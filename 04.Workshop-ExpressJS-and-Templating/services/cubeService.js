@@ -1,18 +1,16 @@
 const Cube = require("../models/Cube.js");
-const cubesDB = require("../config/database.json");
-const fs = require("fs");
 
 const create = (name, description, imageUrl, difficulty) => {
-	let cube = new Cube(name, description, imageUrl, difficulty);
-    console.log(cube);
-	cubesDB.push(cube);
-	let result = JSON.stringify(cubesDB, null, 2);
-
-	fs.writeFileSync("./config/database.json", result);
+	let cube = new Cube({name, description, imageUrl, difficulty});
+    return cube.save()
 };
 
 const getAll = () => {
-	return cubesDB;
+	return Cube.find({});
+}
+
+const getSingle = (id) => {
+	return Cube.findById(id)
 }
 
 const search = (text, from , to) => {
@@ -34,7 +32,8 @@ const search = (text, from , to) => {
 let cubeService = {
     create,
 	getAll,
-	search
+	search,
+	getSingle
 }
 
 module.exports = cubeService;

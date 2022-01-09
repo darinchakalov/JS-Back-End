@@ -9,10 +9,9 @@ const accessorySchema = new mongoose.Schema({
 	imageUrl: {
 		type: String,
 		required: true,
-		validate:
-			/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
+		validate: [/^https?/, "Invalid image Url"],
 	},
-	desription: {
+	description: {
 		type: String,
 		required: true,
 		maxlength: 100,

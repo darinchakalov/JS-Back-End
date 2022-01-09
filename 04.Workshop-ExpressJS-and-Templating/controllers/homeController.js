@@ -3,8 +3,14 @@ const router = express.Router();
 const cubeService = require("../services/cubeService.js");
 
 const renderHome = (req, res) => {
-	let cubes = cubeService.getAll();
-	res.render("index", { cubes });
+	// let cubes = cubeService.getAll();
+	cubeService.getAll()
+		.then(cubes => {
+			res.render("index", { cubes });
+		}) 
+		.catch(err => {
+			console.log('This went wrong: ', err);
+		})
 };
 
 const search = (req, res) => {

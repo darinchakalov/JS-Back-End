@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 const cubeSchema = new mongoose.Schema({
-	id: mongoose.ObjectId,
+	// id: mongoose.ObjectId,
 	name: {
 		type: String,
 		required: true,
 	},
-	desription: {
+	description: {
 		type: String,
 		required: true,
 		maxlength: 100,
@@ -14,7 +14,7 @@ const cubeSchema = new mongoose.Schema({
 	imageUrl: {
 		type: String,
 		required: true,
-		validate: /^https?/,
+		validate: [/^https?/, 'Invalid image Url'],
 	},
 	difficulty: {
 		type: Number,
