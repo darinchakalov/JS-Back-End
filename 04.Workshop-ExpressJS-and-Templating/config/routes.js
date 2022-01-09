@@ -1,6 +1,7 @@
 const cubeController = require("../controllers/cubeController.js");
 const homeController = require("../controllers/homeController.js");
 const aboutController = require("../controllers/aboutController.js");
+const accessoryController = require('../controllers/accessoryController.js')
 
 module.exports = (app) => {
 	app.use(homeController);
@@ -9,7 +10,7 @@ module.exports = (app) => {
 
 	app.use('/cube', cubeController);
 
-	// app.use(detailsController)
+	app.use('/accessory', accessoryController)
 
 	app.get("*", (req, res) => {
 		res.render("404");
