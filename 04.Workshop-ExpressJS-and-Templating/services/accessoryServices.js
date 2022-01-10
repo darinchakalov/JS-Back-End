@@ -10,7 +10,10 @@ const getAll = function () {
 };
 
 const getUnattached = function(ids) {
-	return Accessory.find({_id: {$nin: ids}}).lean()
+	//this is with mongoDb ->
+	// return Accessory.find({_id: {$nin: ids}}).lean()
+	//this is with mongoose query -> 
+	return Accessory.find().where('_id').nin(ids).lean()
 }
 
 const attach = function (cubeId, accessoryId) {

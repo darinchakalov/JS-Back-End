@@ -13,10 +13,11 @@ const getSingle = (id) => {
 	return Cube.findById(id).populate('accessories').lean();
 };
 
-const search = (text, from, to) => {
-	let result = cubesDB;
+const search = async (text, from, to) => {
+	let result = await Cube.find({});
 	if (text) {
 		result = result.filter((c) => c.name.toLowerCase().includes(text.toLowerCase()));
+		console.log(result);
 	}
 
 	if (from) {
