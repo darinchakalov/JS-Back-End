@@ -14,13 +14,14 @@ const createAccessory = (req, res) => {
 
 const renderAttachPage = (req, res) => {
 	let id = req.params.id;
-	let cubeRequest = cubeService.getSingle(id);
-	let accessoriesRequest = accessoryService.getAll();
 
-	Promise.all([cubeRequest, accessoriesRequest])
-		.then((data) => {
-			let [cube, accessories] = [...data]
-			res.render("accessory/attach", { cube, accessories });
+	cubeService
+		.getSingle(id)
+		.then((cube) => {
+			let accessoriesIds = cube.accessories.map((x) => x._id);
+			accessoryService.getUnattached(accessoriesIds).then((accessories) => {
+				res.render("accessory/attach", { cube, accessories });
+			});
 		})
 		.catch((err) => {
 			console.log(`Well this went wrong: `, err);
@@ -30,13 +31,13 @@ const renderAttachPage = (req, res) => {
 const attach = (req, res) => {
 	let cubeId = req.params.id;
 	let accessoryId = req.body.accessory;
-	accessoryService.attach(cubeId, accessoryId)
-	res.redirect(`/cube/details/${cubeId}`)
-}
+	accessoryService.attach(cubeId, accessoryId);
+	res.redirect(`/cube/details/${cubeId}`);
+};
 
 router.get("/create", renderCreatePage);
 router.post("/create", createAccessory);
 router.get("/attach/:id", renderAttachPage);
-router.post('/attach/:id', attach)
+router.post("/attach/:id", attach);
 
 module.exports = router;

@@ -9,6 +9,10 @@ const getAll = function () {
 	return Accessory.find({});
 };
 
+const getUnattached = function(ids) {
+	return Accessory.find({_id: {$nin: ids}}).lean()
+}
+
 const attach = function (cubeId, accessoryId) {
 	Cube.findById(cubeId).then((cube) => {
 		Accessory.findById(accessoryId).then((accessory) => {
@@ -22,6 +26,7 @@ let accessoryService = {
 	create,
 	getAll,
 	attach,
+	getUnattached
 };
 
 module.exports = accessoryService;

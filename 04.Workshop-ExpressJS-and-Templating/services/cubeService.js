@@ -10,7 +10,7 @@ const getAll = () => {
 };
 
 const getSingle = (id) => {
-	return Cube.findById(id).lean();
+	return Cube.findById(id).populate('accessories').lean();
 };
 
 const search = (text, from, to) => {
