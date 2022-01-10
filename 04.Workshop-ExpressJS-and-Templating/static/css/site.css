@@ -81,6 +81,14 @@ div.cube:hover p.name {
     color: white;
 }
 
+.cube{
+    transition: transform 500ms ease;
+}
+
+.cube:hover {
+    transform: scale(1.05);
+}
+
 p.name {
     text-align: center;
     font-size: 20px;

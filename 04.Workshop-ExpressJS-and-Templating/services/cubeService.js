@@ -1,39 +1,39 @@
 const Cube = require("../models/Cube.js");
 
 const create = (name, description, imageUrl, difficulty) => {
-	let cube = new Cube({name, description, imageUrl, difficulty});
-    return cube.save()
+	let cube = new Cube({ name, description, imageUrl, difficulty });
+	return cube.save();
 };
 
 const getAll = () => {
 	return Cube.find({});
-}
+};
 
 const getSingle = (id) => {
-	return Cube.findById(id)
-}
+	return Cube.findById(id).lean();
+};
 
-const search = (text, from , to) => {
+const search = (text, from, to) => {
 	let result = cubesDB;
 	if (text) {
-		result = result.filter(c => c.name.toLowerCase().includes(text.toLowerCase()))
+		result = result.filter((c) => c.name.toLowerCase().includes(text.toLowerCase()));
 	}
 
 	if (from) {
-		result = result.filter(c => c.difficulty >= from)
+		result = result.filter((c) => c.difficulty >= from);
 	}
 
 	if (to) {
-		result = result.filter(c => c.difficulty <= to)
+		result = result.filter((c) => c.difficulty <= to);
 	}
 	return result;
-}
+};
 
 let cubeService = {
-    create,
+	create,
 	getAll,
 	search,
-	getSingle
-}
+	getSingle,
+};
 
 module.exports = cubeService;
