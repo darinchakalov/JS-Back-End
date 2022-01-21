@@ -1,8 +1,11 @@
 const express = require("express");
 const handlebars = require("express-handlebars");
+const cookieParser = require("cookie-parser");
+const { auth } = require("../middlewares/authMiddleware.js");
+const { errorHandler } = require("../middlewares/errorHandlerMIddleware.js");
 
 module.exports = (app) => {
-	//TODO: Setup the view engine
+	//Setup the view engine
 	app.engine(
 		"hbs",
 		handlebars({
@@ -10,12 +13,19 @@ module.exports = (app) => {
 		})
 	);
 	app.set("view engine", "hbs");
-	//TODO: Setup the body parser
-	app.use(express.urlencoded({extended: true}));
-	// app.use(bodyParser.json());
-	//outdated version below
-	// app.use(bodyParser.urlencoded({ extended: false }));
-	// app.use(bodyParser.json());
-	//TODO: Setup the static files
+
+	// Setup the body parser
+	app.use(express.urlencoded({ extended: true }));
+
+	// Setup the static files
 	app.use(express.static("static"));
+
+	// Setup Cookie-Parser
+	app.use(cookieParser());
+
+	//Setup auth middleware
+	app.use(auth);
+
+	//Set global error handler
+	app.use(errorHandler);
 };

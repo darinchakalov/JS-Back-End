@@ -1,0 +1,28 @@
+{
+	"name": "real-estate-agency",
+	"version": "1.0.0",
+	"description": "App created with Express JS and Mongoose",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/darinchakalov/real-estate-agency.git"
+	},
+	"author": "Darin Chakalov",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/darinchakalov/real-estate-agency/issues"
+	},
+	"homepage": "https://github.com/darinchakalov/real-estate-agency#readme",
+	"devDependencies": {
+		"nodemon": "^2.0.15"
+	},
+	"dependencies": {
+		"cookie-parser": "^1.4.6",
+		"express": "^4.17.2",
+		"express-handlebars": "^6.0.2",
+		"mongoose": "^6.1.7"
+	}
+}
