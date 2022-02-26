@@ -11,7 +11,7 @@ const renderLoginPage = (req, res) => {
 const loginUser = async (req, res) => {
 	const { email, password } = req.body;
 	try {
-		let user = await authServices.login(username, password);
+		let user = await authServices.login(email, password);
 
 		let token = await authServices.createToken(user);
 
@@ -21,7 +21,7 @@ const loginUser = async (req, res) => {
 
 		res.redirect("/");
 	} catch (error) {
-		res.locals.error = error;
+		res.locals.error = error.message;
 		return res.render("login");
 	}
 };
