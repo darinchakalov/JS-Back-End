@@ -18,7 +18,18 @@ const createAd = async (req, res) => {
 	}
 };
 
+const renderAllAdsPage = async (req, res) => {
+	try {
+		let ads = await adServices.getAll();
+		res.render("all-ads", { ads });
+	} catch (error) {
+		res.locals.error = error.message;
+		res.render("all-ads");
+	}
+};
+
 router.get("/create", renderCreatePage);
 router.post("/create", createAd);
+router.get("/all-ads", renderAllAdsPage);
 
 module.exports = router;
