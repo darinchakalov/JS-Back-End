@@ -14,6 +14,12 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	myAds: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Ad",
+		},
+	],
 });
 
 userSchema.pre("save", function (next) {
