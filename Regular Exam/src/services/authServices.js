@@ -7,9 +7,9 @@ const register = function (email, password, skills) {
 	return User.create({ email, password, skills });
 };
 
-const login = async function (username, password) {
+const login = async function (email, password) {
 	try {
-		let user = await User.findOne({ username: username });
+		let user = await User.findOne({ email: email });
 		let isPasswordCorrect = await user.confirmPassword(password);
 		if (isPasswordCorrect) {
 			return user;

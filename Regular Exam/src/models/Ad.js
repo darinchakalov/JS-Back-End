@@ -21,7 +21,7 @@ const adSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "User",
 	},
-	usersApplied: [
+	candidates: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",

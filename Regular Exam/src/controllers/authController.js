@@ -12,9 +12,7 @@ const loginUser = async (req, res) => {
 	const { email, password } = req.body;
 	try {
 		let user = await authServices.login(email, password);
-
 		let token = await authServices.createToken(user);
-
 		res.cookie(TOKEN_COOKIE_NAME, token, {
 			httpOnly: true,
 		});
