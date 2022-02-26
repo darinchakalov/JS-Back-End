@@ -9,7 +9,7 @@ const renderLoginPage = (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-	const { username, password } = req.body;
+	const { email, password } = req.body;
 	try {
 		let user = await authServices.login(username, password);
 
@@ -31,19 +31,19 @@ const renderRegisterPage = (req, res) => {
 };
 
 const registerUser = async (req, res) => {
-	let { username, password, repeatPassword } = req.body;
+	let { email, password, repeatPassword, skills } = req.body;
 	if (password !== repeatPassword) {
 		res.locals.error = "Passwords do not match!";
 		return res.render("register");
 	}
-	if (await authServices.userExists(username)) {
-		res.locals.error = "Username already exists!";
+	if (await authServices.userExists(email)) {
+		res.locals.error = "Email address already exists!";
 		return res.render("register");
 	}
 	try {
-		await authServices.register(username, password);
+		await authServices.register(email, password, skills);
 
-		let user = await authServices.login(username, password);
+		let user = await authServices.login(email, password);
 		let token = await authServices.createToken(user);
 		res.cookie(TOKEN_COOKIE_NAME, token, {
 			httpOnly: true,
@@ -51,7 +51,7 @@ const registerUser = async (req, res) => {
 
 		res.redirect("/");
 	} catch (error) {
-		req.locals.error = "Passwords do not match!";
+		req.locals.error = error.message;
 		res.render("register");
 	}
 };

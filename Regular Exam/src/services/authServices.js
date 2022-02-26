@@ -3,8 +3,8 @@ const jwt = require("jsonwebtoken");
 
 const { SECRET } = require("../config/constants.js");
 
-const register = function (username, password) {
-	return User.create({ username, password });
+const register = function (email, password, skills) {
+	return User.create({ email, password, skills });
 };
 
 const login = async function (username, password) {
@@ -19,8 +19,8 @@ const login = async function (username, password) {
 	}
 };
 
-const userExists = function (username) {
-	return User.exists({ username });
+const userExists = function (email) {
+	return User.exists({ email });
 };
 
 const createToken = function (user) {
