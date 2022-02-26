@@ -9,10 +9,12 @@ const userSchema = new mongoose.Schema({
 	password: {
 		type: String,
 		required: true,
+		minlength: [5, "Password should be atleast 5 characters long"],
 	},
 	skills: {
 		type: String,
 		required: true,
+		maxlength: [40, "Skills cannot be more than 40 characters long"],
 	},
 	myAds: [
 		{

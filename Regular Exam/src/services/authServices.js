@@ -31,11 +31,16 @@ const createToken = function (user) {
 	return jwt.sign(payload, SECRET);
 };
 
+const getUser = function (id) {
+	return User.findById(id);
+};
+
 const authServices = {
 	register,
 	login,
 	userExists,
 	createToken,
+	getUser,
 };
 
 module.exports = authServices;

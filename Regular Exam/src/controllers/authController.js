@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const validator = require("validator");
 
 const authServices = require("../services/authServices.js");
 const { TOKEN_COOKIE_NAME } = require("../config/constants.js");
@@ -30,6 +31,19 @@ const renderRegisterPage = (req, res) => {
 
 const registerUser = async (req, res) => {
 	let { email, password, repeatPassword, skills } = req.body;
+	if (!email || !password || !repeatPassword || !skills) {
+		res.locals.error = "All fields are required";
+		return res.render("register");
+	}
+	if (!validator.isEmail(email)) {
+		res.locals.error = "Please use a valid email";
+		return res.render("register");
+	}
+	if (password.length < 5) {
+		res.locals.error = "Password should be atleast 5 characters long";
+		return res.render("register");
+	}
+
 	if (password !== repeatPassword) {
 		res.locals.error = "Passwords do not match!";
 		return res.render("register");
@@ -38,6 +52,7 @@ const registerUser = async (req, res) => {
 		res.locals.error = "Email address already exists!";
 		return res.render("register");
 	}
+
 	try {
 		await authServices.register(email, password, skills);
 
@@ -49,7 +64,7 @@ const registerUser = async (req, res) => {
 
 		res.redirect("/");
 	} catch (error) {
-		req.locals.error = error.message;
+		req.locals.error = error;
 		res.render("register");
 	}
 };
