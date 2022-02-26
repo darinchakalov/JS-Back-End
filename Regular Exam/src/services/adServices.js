@@ -14,12 +14,10 @@ const getOne = function (id) {
 };
 
 const apply = async function (adId, userId) {
-	console.log(adId, userId);
+	console.log("here1");
 	try {
 		let ad = await Ad.findById(adId);
-		console.log(ad);
 		let user = await User.findById(userId);
-		console.log(user);
 		ad.candidates.push(user);
 		return house.save();
 	} catch (error) {
@@ -27,11 +25,16 @@ const apply = async function (adId, userId) {
 	}
 };
 
+const edit = function (adId, ad) {
+	return Ad.findByIdAndUpdate(adId, ad, { runValidators: true });
+};
+
 const adServices = {
 	create,
 	getAll,
 	getOne,
 	apply,
+	edit,
 };
 
 module.exports = adServices;
